@@ -1,8 +1,21 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import "./style.css";
 import StatsTable from '../../components/StatesTable'
+import API from "../../utils/API"
 
 export default function StatsPage(props) {
+
+    const [playerState, setPlayerState] = useState([]);
+
+    useEffect(() =>{
+        API.getAllPlayers().then( res=> {
+            console.log(res.data)
+            setPlayerState(res.data)
+        }).catch(err => {
+            console.log(err);
+        })
+    })
+
     return (
         <div className="statePage">
             <form>
@@ -10,7 +23,7 @@ export default function StatsPage(props) {
             </form>
             <button>Add Player</button>
             <h3>State Table</h3>
-            <StatsTable players={[
+            {/* <StatsTable players={[
                 {
                     id:1,
                     name:"Cristiano",
@@ -35,7 +48,10 @@ export default function StatsPage(props) {
                     team:"CHE",
                     age:21
                 },
-            ]}/>
+            ]}/> */}
+
+            <StatsTable players= {playerState}/>
+
         </div>
     )
 }

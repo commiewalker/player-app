@@ -14,7 +14,7 @@ export default function StatsTable(props) {
                     </tr>
                 </thead>
                 <tbody>
-                {props.players.map(player => <Row player={player}></Row>) }                
+                {props.players.map(player => <Row key={player.id} player={player}></Row>) }                
                 </tbody>
             </table>
         </div>
